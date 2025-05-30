@@ -19,14 +19,14 @@ function spam() {
   return "You are an idiot!";
 }
 function init() {
-  // Audio playback setup
   const audio = new Audio('media/audio/idiot.mp3');
   audio.loop = true;
-
-  // Trigger audio only after user clicks once (bypasses browser autoplay block)
-  document.addEventListener('click', function playAudio() {
-    audio.play();
-    document.removeEventListener('click', playAudio);
+  audio.muted = true;
+  audio.play().then(() => {
+    // Unmute immediately after playing
+    audio.muted = false;
+  }).catch((err) => {
+    console.warn("Autoplay failed:", err);
   });
 
   // Original malwarepad behavior
