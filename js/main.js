@@ -32,10 +32,10 @@ function init() {
     audio.play().catch(err => console.warn("Audio play blocked:", err));
   }
 
-  // Start moving the window (color changes or animations can be controlled here if needed)
+  // Start window movement and any animations here
   playBall();
 
-  // Removed window.close() to keep popups and main window open
+  // Removed window.close() so windows stay open
 }
 
 var xOff = 5,
@@ -78,6 +78,6 @@ function playBall() {
   }
   if (flagRun) {
     window.moveTo(xPos, yPos);
-    setTimeout(playBall, 10);  // slight delay for performance
+    setTimeout(playBall, 10); // small delay for performance
   }
 }
