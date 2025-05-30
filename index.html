@@ -4,9 +4,9 @@
   <!--
       -- > Written by MalwarePad https://malwarepad.com
   -->
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>You are an Idiot! (dot org)</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
   <script src="https://h3.neocities.org/autoplay_enable.js"></script>
   <style>
     #content {
@@ -35,9 +35,9 @@
   <!-- Hidden content -->
   <div id="content">
     <p id="idiot">you are an idiot</p>
-    <img src="media/img/smile-white.png" alt="">
-    <img src="media/img/smile-white.png" alt="">
-    <img src="media/img/smile-white.png" alt="">
+    <img src="media/img/smile-white.png" alt="" />
+    <img src="media/img/smile-white.png" alt="" />
+    <img src="media/img/smile-white.png" alt="" />
     <audio id="audio" src="media/audio/idiot.mp3" loop></audio>
   </div>
 
@@ -46,19 +46,25 @@
 
   <script>
     function init() {
+      // Open first popup and check if blocked
+      const popup = window.open('https://example.com', '_blank');
+      if (!popup) {
+        alert("Popup blocked! Please allow popups to continue.");
+        return;
+      }
+
+      // Start opening popups every 3 seconds
+      setInterval(() => {
+        window.open('https://example.com', '_blank');
+      }, 3000);
+
       // Play audio
       const audio = document.getElementById('audio');
       audio.play().catch(err => {
-        console.warn("Autoplay blocked:", err);
+        console.warn("Audio play blocked:", err);
       });
 
-      // Optional: try to open a popup (can be changed or removed)
-      const popup = window.open('https://example.com', '_blank');
-      if (!popup) {
-        alert("Popup blocked. Allow popups for full experience.");
-      }
-
-      // Show main content, hide button
+      // Show main content and hide unlock button
       document.getElementById('unlock').style.display = 'none';
       document.getElementById('content').style.display = 'block';
     }
