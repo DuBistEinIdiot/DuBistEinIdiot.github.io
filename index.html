@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Written by MalwarePad https://malwarepad.com -->
   <meta charset="UTF-8" />
   <title>You are an Idiot! (dot org)</title>
   <link rel="stylesheet" href="css/style.css" />
-  <script src="https://h3.neocities.org/autoplay_enable.js"></script>
   <style>
     body {
       text-align: center;
       background-color: black;
       color: white;
       font-family: sans-serif;
-    }
-    #content {
-      display: none; /* Hidden until button pressed */
+      transition: filter 0.5s;
     }
     button {
       font-size: 1.5rem;
@@ -22,16 +18,16 @@
       margin-top: 20%;
       cursor: pointer;
     }
+    #content {
+      display: none;
+    }
   </style>
 </head>
 <body>
-
-  <!-- Unlock button -->
   <div id="unlock">
     <button onclick="init()">Click to Continue</button>
   </div>
 
-  <!-- Hidden content -->
   <div id="content">
     <p id="idiot">you are an idiot</p>
     <img src="media/img/smile-white.png" alt="" />
@@ -41,7 +37,5 @@
   </div>
 
   <script src="js/main.js"></script>
-  <script src="js/autoplay.js"></script>
-
 </body>
 </html>
