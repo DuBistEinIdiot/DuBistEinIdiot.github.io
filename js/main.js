@@ -19,6 +19,17 @@ function spam() {
   return "You are an idiot!";
 }
 function init() {
+  // Audio playback setup
+  const audio = new Audio('media/audio/idiot.mp3');
+  audio.loop = true;
+
+  // Trigger audio only after user clicks once (bypasses browser autoplay block)
+  document.addEventListener('click', function playAudio() {
+    audio.play();
+    document.removeEventListener('click', playAudio);
+  });
+
+  // Original malwarepad behavior
   document.body.onclick = reopen;
   document.body.onmouseover = reopen;
   document.body.onmousemove = reopen;
@@ -32,7 +43,6 @@ function init() {
   setTimeout(function () {
     window.close();
   }, 10000);
-}
 var xOff = 5,
   yOff = 5,
   xPos = 400,
