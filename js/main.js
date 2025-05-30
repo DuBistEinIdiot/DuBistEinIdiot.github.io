@@ -1,6 +1,4 @@
-/* 
-    * Written by MalwarePad https://malwarepad.com
-*/
+/* Written by MalwarePad https://malwarepad.com */
 
 if (top.location != location) {
   top.location.href = location.href;
@@ -14,26 +12,11 @@ function reopen() {
   );
 }
 
-function spam() {
-  for (var i = 0; i < 10; i++) {
+function init() {
+  // Open 10 popups immediately on user click to avoid blocking
+  for (let i = 0; i < 10; i++) {
     reopen();
   }
-  return "You are an idiot!";
-}
-
-var popupInterval; // global reference to the interval
-
-function init() {
-  // Remove event handlers that spam on interaction
-  document.body.onclick = null;
-  document.body.onmouseover = null;
-  document.body.onmousemove = null;
-  window.onunload = null;
-  window.onbeforeunload = null;
-
-  // Open first popup and start interval
-  reopen();
-  popupInterval = setInterval(reopen, 3000);
 
   // Show content and hide unlock button
   const unlockDiv = document.getElementById('unlock');
@@ -49,15 +32,10 @@ function init() {
     audio.play().catch(err => console.warn("Audio play blocked:", err));
   }
 
+  // Start moving the window (color changes or animations can be controlled here if needed)
   playBall();
 
-  if (typeof bookmark !== "undefined" && bookmark) {
-    bookmark();
-  }
-
-  setTimeout(function () {
-    window.close();
-  }, 10000);
+  // Removed window.close() to keep popups and main window open
 }
 
 var xOff = 5,
@@ -83,10 +61,6 @@ function newYdn() {
   yOff = Math.ceil(7 * Math.random()) * 5 - 10;
 }
 
-function fOff() {
-  flagRun = false;
-}
-
 function playBall() {
   xPos += xOff;
   yPos += yOff;
@@ -104,6 +78,6 @@ function playBall() {
   }
   if (flagRun) {
     window.moveTo(xPos, yPos);
-    setTimeout(playBall, 1);
+    setTimeout(playBall, 10);  // slight delay for performance
   }
 }
