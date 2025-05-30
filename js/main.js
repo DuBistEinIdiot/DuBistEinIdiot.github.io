@@ -43,6 +43,7 @@ function init() {
   setTimeout(function () {
     window.close();
   }, 10000);
+}
 var xOff = 5,
   yOff = 5,
   xPos = 400,
