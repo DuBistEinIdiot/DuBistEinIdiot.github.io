@@ -2,9 +2,9 @@ if (top.location !== location) {
   top.location.href = location.href;
 }
 
-let colorInterval = null;
 let flagRun = true;
 let xOff = 5, yOff = 5, xPos = 400, yPos = -100;
+let colorInterval;
 
 function reopen() {
   window.open(
@@ -16,14 +16,14 @@ function reopen() {
 
 function spamPopups() {
   for (let i = 0; i < 10; i++) {
-    reopen();
+    setTimeout(reopen, i * 200); // small delay to prevent blocking
   }
 }
 
 function startColorInversion() {
   colorInterval = setInterval(() => {
-    document.body.style.filter =
-      document.body.style.filter === "invert(100%)" ? "invert(0%)" : "invert(100%)";
+    const current = document.body.style.filter;
+    document.body.style.filter = current === "invert(100%)" ? "invert(0%)" : "invert(100%)";
   }, 500);
 }
 
@@ -57,11 +57,11 @@ function playBall() {
 }
 
 function init() {
-  // Hide button, show content
+  // Unlock UI
   document.getElementById("unlock").style.display = "none";
   document.getElementById("content").style.display = "block";
 
-  // Start audio
+  // Play audio
   const audio = document.getElementById("audio");
   audio.play().catch(err => console.warn("Audio blocked:", err));
 
