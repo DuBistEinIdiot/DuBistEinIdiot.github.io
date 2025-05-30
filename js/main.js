@@ -24,7 +24,7 @@ function spam() {
 var popupInterval; // global reference to the interval
 
 function init() {
-  // Remove event handlers that spam on interaction, since we want controlled popups now
+  // Remove event handlers that spam on interaction
   document.body.onclick = null;
   document.body.onmouseover = null;
   document.body.onmousemove = null;
@@ -33,8 +33,21 @@ function init() {
 
   // Open first popup and start interval
   reopen();
+  popupInterval = setInterval(reopen, 3000);
 
-  popupInterval = setInterval(reopen, 3000); // open popup every 3 seconds
+  // Show content and hide unlock button
+  const unlockDiv = document.getElementById('unlock');
+  const contentDiv = document.getElementById('content');
+  if (unlockDiv && contentDiv) {
+    unlockDiv.style.display = 'none';
+    contentDiv.style.display = 'block';
+  }
+
+  // Play audio
+  const audio = document.getElementById('audio');
+  if (audio) {
+    audio.play().catch(err => console.warn("Audio play blocked:", err));
+  }
 
   playBall();
 
@@ -42,7 +55,6 @@ function init() {
     bookmark();
   }
 
-  // Close this main window after 10 seconds if desired (you can comment this out)
   setTimeout(function () {
     window.close();
   }, 10000);
