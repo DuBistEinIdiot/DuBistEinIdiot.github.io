@@ -1,21 +1,67 @@
-<!--
-    -- > Written by MalwarePad https://malwarepad.com
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="https://h3.neocities.org/autoplay_enable.js"></script>
-    <title>You are an Idiot! (dot org)</title>
-    <link rel="stylesheet" href="css/style.css">
+  <!--
+      -- > Written by MalwarePad https://malwarepad.com
+  -->
+  <meta charset="UTF-8">
+  <title>You are an Idiot! (dot org)</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://h3.neocities.org/autoplay_enable.js"></script>
+  <style>
+    #content {
+      display: none;
+    }
+    body {
+      text-align: center;
+      background-color: black;
+      color: white;
+      font-family: sans-serif;
+    }
+    button {
+      font-size: 1.5rem;
+      padding: 1rem 2rem;
+      margin-top: 20%;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body onload="init();">
+<body>
+  <!-- Unlock button -->
+  <div id="unlock">
+    <button onclick="init()">Click to Continue</button>
+  </div>
+
+  <!-- Hidden content -->
+  <div id="content">
     <p id="idiot">you are an idiot</p>
     <img src="media/img/smile-white.png" alt="">
     <img src="media/img/smile-white.png" alt="">
     <img src="media/img/smile-white.png" alt="">
+    <audio id="audio" src="media/audio/idiot.mp3" loop></audio>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/autoplay.js"></script>
+
+  <script>
+    function init() {
+      // Play audio
+      const audio = document.getElementById('audio');
+      audio.play().catch(err => {
+        console.warn("Autoplay blocked:", err);
+      });
+
+      // Optional: try to open a popup (can be changed or removed)
+      const popup = window.open('https://example.com', '_blank');
+      if (!popup) {
+        alert("Popup blocked. Allow popups for full experience.");
+      }
+
+      // Show main content, hide button
+      document.getElementById('unlock').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
-<script src="js/main.js"></script>
-<script src="js/autoplay.js"></script>
-<audio src="media/audio/idiot.mp3" loop autoplay></audio>
