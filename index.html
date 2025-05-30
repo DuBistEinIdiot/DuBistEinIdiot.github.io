@@ -44,30 +44,5 @@
   <script src="js/main.js"></script>
   <script src="js/autoplay.js"></script>
 
-  <script>
-    function init() {
-      // Open first popup and check if blocked
-      const popup = window.open('https://example.com', '_blank');
-      if (!popup) {
-        alert("Popup blocked! Please allow popups to continue.");
-        return;
-      }
-
-      // Start opening popups every 3 seconds
-      setInterval(() => {
-        window.open('https://example.com', '_blank');
-      }, 3000);
-
-      // Play audio
-      const audio = document.getElementById('audio');
-      audio.play().catch(err => {
-        console.warn("Audio play blocked:", err);
-      });
-
-      // Show main content and hide unlock button
-      document.getElementById('unlock').style.display = 'none';
-      document.getElementById('content').style.display = 'block';
-    }
-  </script>
 </body>
 </html>
